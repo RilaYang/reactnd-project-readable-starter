@@ -1,4 +1,4 @@
-import * as type from './ActionType'
+import * as type from './ActionType';
 import { getCategories } from './../api';
 
 const api = "http://localhost:3001";
