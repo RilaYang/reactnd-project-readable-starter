@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.7",
     "semantic-ui-react": "^0.82.5",
     "shortid": "^2.2.13"
   },
