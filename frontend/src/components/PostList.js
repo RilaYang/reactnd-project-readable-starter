@@ -20,7 +20,7 @@ const PostList = (props) => {
     const { list, onClickHandler } = props;
 
     const options = [
-        { key: 's', text: 'Like', value: 'score' },
+        { key: 's', text: 'voteScore', value: 'score' },
         { key: 't', text: 'timestamp', value: 'time' },
     ];
 
