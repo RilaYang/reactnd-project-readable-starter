@@ -75,6 +75,7 @@ class NewPost extends Component {
                                 <Form.Field control={Select} label='Category' name='category' options={options} placeholder='Category' onChange={this.handleChange} required/>
                             </Form.Group>
                             <Form.Field control={TextArea} lable='Body' name="body" placeholder='Body' onChange={this.handleChange} required/>
+                            <Button type='submit'>Submit</Button>
                         </Form>
                     </Modal.Description>
                 </Modal.Content>
