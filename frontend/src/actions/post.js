@@ -1,5 +1,4 @@
 import * as type from './ActionType';
-import PostList from './../components/PostList';
 
 const api = "http://localhost:3001";
 
