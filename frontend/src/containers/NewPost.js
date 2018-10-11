@@ -42,9 +42,9 @@ class NewPost extends Component {
     }
 
     handleSelectChange(e, result) {
-        let state = {};
+        let select = {};
         select[result.name] = result.value;
-        this.setState(change);
+        this.setState(select);
     }
 
     handleOpen = () => this.setState({modalOpen: true});

@@ -5,9 +5,6 @@ import { getPosts } from './actions/post';
 import { Container, Grid } from 'semantic-ui-react';
 import { PostList, Nav } from './components';
 import { NewPost, PostDetail } from './containers';
-import categories from './reducers/categories';
-import Nav from './components/Nav';
-import { getCategories } from './api';
 
 class  App extends Component{
   constructor(props){

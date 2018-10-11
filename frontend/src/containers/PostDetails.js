@@ -5,8 +5,6 @@ import { addComment } from '../actions/comments';
 import { Container, Header, Icon, Breadcrumb, Comment, Form, Button, Input, TextArea } from 'semantic-ui-react';
 import update from 'react-addons-update';
 import shortid from 'shortid';
-import { getPostsComment } from './../actions/post';
-import { addComment } from './../actions/comments';
 
 class PostDetail extends Component {
     constructor(props) {
@@ -73,7 +71,7 @@ class PostDetail extends Component {
 
         return (
             <Container>
-                <Head size="huge">{post.title}</Head>
+                <Header size="huge">{post.title}</Header>
 
                 <Breadcrumb>
                     <Breadcrumb.Section><Icon name="calendar"/> {new Date(post.timestamp).toLocaleDateString()}</Breadcrumb.Section>

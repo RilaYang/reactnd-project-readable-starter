@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {CreateStore, applyMiddleware, compose, combineReducers } from 'redux';
+import {createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
@@ -16,7 +16,7 @@ const store = createStore(
 );
 
 ReactDOM.render(
-    <Provider stroe={store}>
+    <Provider store={store}>
         <App/>
     </Provider>
     , document.getElementById('root')
