@@ -1,137 +1,142 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPostsComment } from '../actions/post';
 import { addComment } from '../actions/comments';
-import { Container, Header, Icon, Breadcrumb, Comment, Form, Button, Input, TextArea } from 'semantic-ui-react';
+import { Container, Header, Icon, Breadcrumb, Comment, Form, Button, Input, TextArea} from 'semantic-ui-react'
 import update from 'react-addons-update';
 import shortid from 'shortid';
 
 class PostDetail extends Component {
-    constructor(props) {
-        super(props);
-         this.handleSubmit = this.handleSubmit.bind(this);
-         this.handleChange = this.handleChange.bind(this);
 
-         this.state = {
-             comment_data: {
-                 id: shortid.generate(),
-                 timestamp: Date.now(),
-                 parentId: this.props.id,
-                 author: '',
-                 body: ''
-             }
-         };
-    }
+  constructor(props) {
+    super(props);
 
-    handleSubmit(e) {
-        e.preventDefault();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
-        let defaultSubmitCommentData = {
-            id: shortid.generate(),
-            timestamp: Date.now(),
-            parentId: this.props.id
-        };
+    this.state = {
+      comment_data: {
+        id: shortid.generate(),
+        timestamp: Date.now(),
+        parentId: this.props.id,
+        author: '',
+        body: ''
+      }
+    };
+  }
 
-        this.setState({
-            comment_data: update(
-                this.state.comment_data,
-                {
-                    $merge: defaultSubmitCommentData
-                }
-            )
-        });
+  handleSubmit(e) {
+    e.preventDefault();
 
-        this.props.addComment(this.state.comment_data);
-    }
-
-    handleChange(e) {
-        this.setState({
-            comment_data: update(
-                this.state.comment_data,{
-                    $merge: {[e.target.name]: e.target.value}
-                }
-            )
-        });
-    }
-
-    componentDidMount() {
-        const { id, getPostsComment } = this.props;
-        getPostsComment(id);
+    let defaultSubmitCommentData = {
+      id: shortid.generate(),
+      timestamp: Date.now(),
+      parentId: this.props.id
     };
 
-    filterPost = (data) => {
-        const { id } = this.props;
-        return id === data.id;
-    };
+    this.setState({
+      comment_data: update(
+        this.state.comment_data,
+        {
+          $merge: defaultSubmitCommentData
+        }
+      )
+    });
 
-    render() {
-        
-        const { posts, comments } = this.props;
-        const post = posts.filter(this.filterPost).pop();
+    this.props.addComment(this.state.comment_data);
+  }
 
-        return (
-            <Container>
-                <Header size="huge">{post.title}</Header>
+  handleChange(e) {
+    this.setState({
+      comment_data: update(
+        this.state.comment_data,
+        {
+          $merge: {[e.target.name]: e.target.value}
+        }
+      )
+    });
+  }
+  
+  componentDidMount() {
+    const { id, getPostsComment } = this.props;
+    getPostsComment(id);
+  };
 
-                <Breadcrumb>
-                    <Breadcrumb.Section><Icon name="calendar"/> {new Date(post.timestamp).toLocaleDateString()}</Breadcrumb.Section>
-                    <Breadcrumb.Divider />
-                    <Breadcrumb.Section><Icon name="user" /> {post.author}</Breadcrumb.Section>
-                    <Breadcrumb.Divider />
-                    <Breadcrumb.Section><Icon name="tag" /> {post.category}</Breadcrumb.Section>
-                    <Breadcrumb.Divider />
-                    <Breadcrumb.Section><Icon name= "thumbs outline up"/> {post.voteScore}</Breadcrumb.Section>
-                </Breadcrumb>
+  filterPost = (data) => {
+    const { id } = this.props;
+    return id === data.id;
+  };
 
-                <p>{post.body}</p>
+  render() {
 
-                <Comment.Group>
-                    <Header as='h3' dividing>Comments</Header>
-                    {
-                        comments.map(function(comment, i){
-                            return (
-                                <Comment key={i}>
-                                    <Comment.Content>
-                                        <Comment.Author as='a'>{comment.author}</Comment.Author>
-                                        <Comment.Metadata>
-                                            <div>{new Date(comment.timestamp).toLocaleDateString()}</div>
-                                        </Comment.Metadata>
-                                        <Comment.Text>{comment.body}</Comment.Text>
-                                    </Comment.Content>
-                                </Comment>
-                            )
-                        })
-                    }
+    const { posts, comments } = this.props;
 
-                    <Form reply action="/comments" onSubmit={(e) => this.handleSubmit(e)}>
-                        <Form.Group>
-                            <Form.Field control={Input} label='Author' name="author" placeholder='Author' onChange={this.handleChange}/>
-                        </Form.Group>
-                        <Form.Field control={TextArea} label='Body' name="body" placeholder='Write what you want' onChange={this.handleChange}/>
-                        <Button content='Add Reply' labelPosition='left' icon='edit' primary />
-                    </Form>
-                </Comment.Group>
-            </Container>
-        )
-    }
+    const post = posts.filter(this.filterPost).pop();
+
+    return (
+      <Container>
+
+        <Header size="huge">{post.title}</Header>
+
+        <Breadcrumb>
+          <Breadcrumb.Section><Icon name="calendar"/> {new Date(post.timestamp).toLocaleDateString()}</Breadcrumb.Section>
+          <Breadcrumb.Divider />
+          <Breadcrumb.Section><Icon name="user"/> {post.author}</Breadcrumb.Section>
+          <Breadcrumb.Divider />
+          <Breadcrumb.Section><Icon name="tag"/> {post.category}</Breadcrumb.Section>
+          <Breadcrumb.Divider />
+          <Breadcrumb.Section><Icon name="thumbs outline up"/> {post.voteScore}</Breadcrumb.Section>
+        </Breadcrumb>
+
+        <p>{post.body}</p>
+
+        <Comment.Group>
+          <Header as='h3' dividing>Comments</Header>
+          {
+            comments.map(function(comment, i) {
+              return (
+               <Comment key={i}>
+                 <Comment.Content>
+                   <Comment.Author as='a'>{comment.author}</Comment.Author>
+                   <Comment.Metadata>
+                     <div>{new Date(comment.timestamp).toLocaleDateString()}</div>
+                   </Comment.Metadata>
+                   <Comment.Text>{comment.body}</Comment.Text>
+                 </Comment.Content>
+               </Comment>
+              )
+            })
+          }
+          <Form reply action="/comments" onSubmit={(e) => this.handleSubmit(e)}>
+            <Form.Group>
+              <Form.Field control={Input} label='Author' name="author" placeholder='Author' onChange={this.handleChange}/>
+            </Form.Group>
+            <Form.Field control={TextArea} label='Body' name="body" placeholder='Body' onChange={this.handleChange}/>
+            <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+          </Form>
+        </Comment.Group>
+
+      </Container>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        posts: state.posts.list,
-        comments: state.posts.comments
-    }
+  return {
+    posts: state.posts.list,
+    comments: state.posts.comments
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        getPostsComment: (id) => {
-            return dispatch(getPostsComment(id));
-        },
-        addComment: (data) => {
-            return dispatch(addComment(data));
-        }
+  return {
+    getPostsComment: (id) => {
+      return dispatch(getPostsComment(id));
+    },
+    addComment: (data) => {
+      return dispatch(addComment(data));
     }
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

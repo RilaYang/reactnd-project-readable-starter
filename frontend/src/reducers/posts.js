@@ -1,43 +1,43 @@
-import * as type from '../actions/ActionType';
+import * as types from '../actions/ActionTypes';
 import update from 'react-addons-update';
 
 const initState = {
-    list: [],
-    post: {},
-    comments: []
+  list: [],
+  post: {},
+  comments: []
 };
 
 export default function post(state, action) {
-    if (typeof state === "undefined")
-        state = initState;
+  if (typeof state === "undefined")
+    state = initState;
 
-    switch(action.type) {
-        case type.GET_POST:
-            return update(state, {
-                list: { $set: action.posts }
-            });
+  switch(action.type) {
+    case types.GET_POST:
+      return update(state, {
+        list: { $set: action.posts }
+      });
 
-        case type.GET_TARGET_POST:
-            return update(state, {
-                post: { $set: action.post }
-            });
-        
-        case type.GET_POST_COMMENT:
-            return update(state, {
-                comments: { $set: action.comments }
-            });
+    case types.GET_TARGET_POST:
+      return update(state, {
+        post: { $set: action.post }
+      });
 
-        case type.POST_NEW_POST:
-            return update(state, {
-                list: {$push: [action.post]}
-            });
+    case types.GET_POST_COMMENT:
+      return update(state, {
+        comments: { $set: action.comments }
+      });
 
-        case type.POST_ADD_COMMENT:
-            return update(state, {
-                comments: {$push: [action.comment]}
-            });
+    case types.POST_NEW_POST:
+      return update(state, {
+        list: { $push: [action.post] }
+      });
 
-        default:
-            return state;
-    }
+    case types.POST_ADD_COMMENT:
+      return update(state, {
+        comments: { $push: [action.comment] }
+      });
+
+    default:
+      return state;
+  }
 }

@@ -1,21 +1,20 @@
-import * as type from '../actions/ActionType';
+import * as types from '../actions/ActionTypes';
 import update from 'react-addons-update';
 
 const initState = {
-    list: []
+  list: []
 };
 
 export default function categories(state, action) {
-    if (typeof state === "undefined")
-        state = initState;
+  if (typeof state === "undefined")
+    state = initState;
 
-    switch (action.type) {
-        case type.GET_CATEGORIES:
-            return update(state, {
-                list: { $set: action.categories }
-            });
-        
-        default:
-            return state;
-    }
+  switch(action.type) {
+    case types.GET_CATEGORIES:
+      return update(state, {
+        list: { $set: action.categories }
+      });
+    default:
+      return state;
+  }
 }

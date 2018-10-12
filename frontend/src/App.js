@@ -6,8 +6,8 @@ import { Container, Grid } from 'semantic-ui-react';
 import { PostList, Nav } from './components';
 import { NewPost, PostDetail } from './containers';
 
-class  App extends Component{
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super(props);
 
     this.handle_select_category = this.handle_select_category.bind(this);
@@ -43,20 +43,20 @@ class  App extends Component{
   render() {
 
     const { activeCategorie, selectedPostId } = this.state;
-    const {categories, posts } = this.props;
+    const { categories, posts } = this.props;
 
     posts.sort((a, b) => {
       return -(a.voteScore - b.voteScore);
     });
+    
+    const filterdPost = (activeCategorie !== 'all') ? posts.filter(this.filterPost) : posts;
 
-    const filterPost = (activeCategorie !== 'all') ? posts.filter(this.filterPost) : posts;
-
-    const containerstyle = { 
+    const containerStyle = {
       marginTop: '20px'
     };
-
+    
     return (
-      <Container style={containerstyle}>
+      <Container style={containerStyle}>
         <Grid>
 
           <Grid.Column floated="left" width={4}>
@@ -69,8 +69,8 @@ class  App extends Component{
           <Grid.Column floated="left" width={12}>
             {
               (!selectedPostId)
-                ?<PostList list={filterPost} onClickHandler={this.handle_select_post}/>
-                :<PostDetail id={selectedPostId}/>
+                ? <PostList list={filterdPost} onClickHandler={this.handle_select_post}/>
+                : <PostDetail id={selectedPostId}/>
             }
           </Grid.Column>
         </Grid>
