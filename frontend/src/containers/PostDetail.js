@@ -74,13 +74,13 @@ class PostDetail extends Component {
                 <Header size="huge">{post.title}</Header>
 
                 <Breadcrumb>
-                    <Breadcrumb.Section><Icon name="calendar"/> {new Date(post.timestamp).toLocaleDateString()}</Breadcrumb.Section>
+                    <Breadcrumb.Section><Icon name="calendar alternate outline" color='orange' /> {new Date(post.timestamp).toLocaleDateString()}</Breadcrumb.Section>
                     <Breadcrumb.Divider />
-                    <Breadcrumb.Section><Icon name="user" /> {post.author}</Breadcrumb.Section>
+                    <Breadcrumb.Section><Icon name="user" color='purple' /> {post.author}</Breadcrumb.Section>
                     <Breadcrumb.Divider />
-                    <Breadcrumb.Section><Icon name="tag" /> {post.category}</Breadcrumb.Section>
+                    <Breadcrumb.Section><Icon name="tag" color='blue' /> {post.category}</Breadcrumb.Section>
                     <Breadcrumb.Divider />
-                    <Breadcrumb.Section><Icon name= "thumbs outline up"/> {post.voteScore}</Breadcrumb.Section>
+                    <Breadcrumb.Section><Icon name= "star" color='yellow' /> {post.voteScore}</Breadcrumb.Section>
                 </Breadcrumb>
 
                 <p>{post.body}</p>

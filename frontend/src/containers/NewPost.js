@@ -58,12 +58,21 @@ class NewPost extends Component {
 
         options.shift();
 
+        const inlineStyle = {
+            modal : {
+              marginTop: '300px !important',
+              marginLeft: '20%',
+              marginRight: 'auto'
+            }
+          };
+
         return (
             <Modal
             size="small"
             trigger={<Button onClick={this.handleOpen} fluid primary>New Post</Button>}
             open={this.state.modalOpen}
-            onClose={this.handleClose}>
+            onClose={this.handleClose}
+            style={inlineStyle.modal}>
                 <Modal.Header>New Post</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
