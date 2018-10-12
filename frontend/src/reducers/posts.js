@@ -3,7 +3,7 @@ import update from 'react-addons-update';
 
 const initState = {
     list: [],
-    post: [],
+    post: {},
     comments: []
 };
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Connect, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
 import { Button, Modal, Form, Input, Select, TextArea } from 'semantic-ui-react';
 import { newPosts } from '../actions/post';
-import { getCategories } from './../actions/categories';
 
 class NewPost extends Component {
     constructor(props) {
@@ -59,9 +58,9 @@ class NewPost extends Component {
 
         options.shift();
 
-        return(
+        return (
             <Modal
-            size='small'
+            size="small"
             trigger={<Button onClick={this.handleOpen} fluid primary>New Post</Button>}
             open={this.state.modalOpen}
             onClose={this.handleClose}>
@@ -70,11 +69,11 @@ class NewPost extends Component {
                     <Modal.Description>
                         <Form action="/posts" onSubmit={(e) => this.handleSubmit(e)}>
                             <Form.Group widths='equal'>
-                                <Form.Field control={Input} label='Title' name='title' placeholder='Title' onChange={this.handleChange} required/>
-                                <Form.Field control={Input} label='Author' name='author' placeholder='Author' onChange={this.handleChange} required/>
-                                <Form.Field control={Select} label='Category' name='category' options={options} placeholder='Category' onChange={this.handleChange} required/>
+                                <Form.Field control={Input} label='Title' name="title" placeholder='Title' onChange={this.handleChange} required/>
+                                <Form.Field control={Input} label='Author' name="author" placeholder='Author' onChange={this.handleChange} required/>
+                                <Form.Field control={Select} label='Category' name="category" options={options} placeholder='Category' onChange={this.handleSelectChange} required/>
                             </Form.Group>
-                            <Form.Field control={TextArea} lable='Body' name="body" placeholder='Body' onChange={this.handleChange} required/>
+                            <Form.Field control={TextArea} label='Body' name="body" placeholder='Body' onChange={this.handleChange} required/>
                             <Button type='submit'>Submit</Button>
                         </Form>
                     </Modal.Description>
@@ -84,7 +83,7 @@ class NewPost extends Component {
     }
 }
 
-const mapStateprops = (state) => {
+const mapStateToProps = (state) => {
     return {
         categories: state.categories.list,
     }
@@ -98,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateprops, mapDispatchToProps)(newPosts);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost);

@@ -15,7 +15,7 @@ class  App extends Component{
     this.filterPost = this.filterPost.bind(this);
 
     this.state = {
-      activeCategory: 'all',
+      activeCategorie: 'all',
       selectedPostId: ''
     }
   }
@@ -27,7 +27,7 @@ class  App extends Component{
 
   handle_select_category = (e, { name }) => {
     this.setState({
-      activeCategory: name,
+      activeCategorie: name,
       selectedPostId: ''
     });
   };
@@ -37,29 +37,31 @@ class  App extends Component{
   };
 
   filterPost = (data) => {
-    return this.state.activeCategory === data.category;
+    return this.state.activeCategorie === data.category;
   };
 
   render() {
 
-    const { activeCategory, selectedPostId } = this.state;
+    const { activeCategorie, selectedPostId } = this.state;
     const {categories, posts } = this.props;
 
     posts.sort((a, b) => {
       return -(a.voteScore - b.voteScore);
     });
 
-    const filterPost = (activeCategory !== 'all') ? posts.filter(this.filterPost) : posts;
+    const filterPost = (activeCategorie !== 'all') ? posts.filter(this.filterPost) : posts;
 
-    const containerstyle = {marginTop: '20px'};
+    const containerstyle = { 
+      marginTop: '20px'
+    };
 
-    return(
+    return (
       <Container style={containerstyle}>
         <Grid>
 
           <Grid.Column floated="left" width={4}>
             <Nav categories={categories}
-                 activeCategory={activeCategory}
+                 activeCategorie={activeCategorie}
                  onClickHandler={this.handle_select_category}/>
             <NewPost/>
           </Grid.Column>

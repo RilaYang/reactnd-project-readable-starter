@@ -78,17 +78,19 @@ class PostDetail extends Component {
                     <Breadcrumb.Divider />
                     <Breadcrumb.Section><Icon name="user" /> {post.author}</Breadcrumb.Section>
                     <Breadcrumb.Divider />
+                    <Breadcrumb.Section><Icon name="tag" /> {post.category}</Breadcrumb.Section>
+                    <Breadcrumb.Divider />
                     <Breadcrumb.Section><Icon name= "thumbs outline up"/> {post.voteScore}</Breadcrumb.Section>
                 </Breadcrumb>
 
                 <p>{post.body}</p>
 
                 <Comment.Group>
-                    <Header as='h3' diving>Comments</Header>
+                    <Header as='h3' dividing>Comments</Header>
                     {
                         comments.map(function(comment, i){
                             return (
-                                <Comment key={1}>
+                                <Comment key={i}>
                                     <Comment.Content>
                                         <Comment.Author as='a'>{comment.author}</Comment.Author>
                                         <Comment.Metadata>
@@ -103,9 +105,9 @@ class PostDetail extends Component {
 
                     <Form reply action="/comments" onSubmit={(e) => this.handleSubmit(e)}>
                         <Form.Group>
-                            <Form.Field contorl={Input} label='Author' name='author' placeholder='Author' onChange={this.handleChange}/>
+                            <Form.Field control={Input} label='Author' name="author" placeholder='Author' onChange={this.handleChange}/>
                         </Form.Group>
-                        <Form.Group control={TextArea} label='Body' name="body" placeholder='Write what you want' onChange={this.handleChange}/>
+                        <Form.Field control={TextArea} label='Body' name="body" placeholder='Write what you want' onChange={this.handleChange}/>
                         <Button content='Add Reply' labelPosition='left' icon='edit' primary />
                     </Form>
                 </Comment.Group>
@@ -116,7 +118,7 @@ class PostDetail extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        props: state.posts.list,
+        posts: state.posts.list,
         comments: state.posts.comments
     }
 };

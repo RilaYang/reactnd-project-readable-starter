@@ -1,5 +1,4 @@
 import * as type from './ActionType';
-import { deleteComment } from './../api';
 
 const api = "http://localhost:3001";
 
