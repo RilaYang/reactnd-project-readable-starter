@@ -1,4 +1,4 @@
-api-server/node_modules
-frontend/node_modules
+api-server/node_modules/
+frontend/node_modules/
 .idea
 .vscode
