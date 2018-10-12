@@ -58,12 +58,22 @@ class NewPost extends Component {
 
         options.shift();
 
+        const inlineStyle = {
+            modal : {
+              marginTop: '0px !important',
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }
+          };
+
         return (
             <Modal
             size="small"
             trigger={<Button onClick={this.handleOpen} fluid primary>New Post</Button>}
+            centered={false}
             open={this.state.modalOpen}
-            onClose={this.handleClose}>
+            onClose={this.handleClose}
+            style={inlineStyle.modal}>
                 <Modal.Header>New Post</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
@@ -73,12 +83,13 @@ class NewPost extends Component {
                                 <Form.Field control={Input} label='Author' name="author" placeholder='Author' onChange={this.handleChange} required/>
                                 <Form.Field control={Select} label='Category' name="category" options={options} placeholder='Category' onChange={this.handleSelectChange} required/>
                             </Form.Group>
-                            <Form.Field control={TextArea} label='Body' name="body" placeholder='Body' onChange={this.handleChange} required/>
-                            <Button type='submit'>Submit</Button>
+                            <Form.Field control={TextArea} label='Body' name="body" placeholder='Write what you want' onChange={this.handleChange} required/>
+                            <Button type='submit' color='blue' >Submit</Button>
                         </Form>
                     </Modal.Description>
                 </Modal.Content>
             </Modal>
+            
         );
     }
 }
@@ -96,5 +107,6 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
