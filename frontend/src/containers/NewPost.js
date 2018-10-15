@@ -60,8 +60,8 @@ class NewPost extends Component {
 
         const inlineStyle = {
             modal : {
-              marginTop: '0px !important',
-              marginLeft: 'auto',
+              marginTop: '300px !important',
+              marginLeft: '20%',
               marginRight: 'auto'
             }
           };
