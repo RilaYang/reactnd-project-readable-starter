@@ -1,21 +1,33 @@
-import * as type from '../actions/ActionType';
-import update from 'react-addons-update';
+import {
+    GET_CATEGORIES,
+    SELECT_CATEGORY
+  } from '../constants/ActionTypes'
 
-const initState = {
-    list: []
-};
+const allCategories = {
+    name: "all categories",
+    path: ""
+}
 
-export default function categories(state, action) {
-    if (typeof state === "undefined")
-        state = initState;
+const initialState = {
+    list: [],
+    selectedCategory: {}
+}
 
-    switch (action.type) {
-        case type.GET_CATEGORIES:
-            return update(state, {
-                list: { $set: action.categories }
-            });
-        
+const categories = (state = initialState, action) => {
+    switch(action.type) {
+        case GET_CATEGORIES:
+            return {
+                ...state,
+                list: [allCategories].concat(action.categories).map((category, idx) => ({ key: idx, ...category }))
+            }
+        case SELECT_CATEGORY:
+            return {
+                ...state,
+                selectedCategory: (state.list || []).reduce((acc, val) => action.categoryName === val.name ? val : acc, {})
+            }
         default:
-            return state;
+            return state
     }
 }
+
+export default categories
