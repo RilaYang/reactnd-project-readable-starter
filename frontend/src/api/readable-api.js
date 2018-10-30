@@ -1,9 +1,9 @@
-import { create } from 'apisauce'
+import { create } from 'apisauce';
 
 // define the api
 const api = create({
   baseURL: 'http://localhost:3001',
-  headers: { Authorization: 'MarioJuniorPro' }
+  headers: { Authorization: 'whatever-you-want' }
 })
 // Categories 
 export const getCategories = category => {
