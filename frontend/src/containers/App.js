@@ -1,26 +1,30 @@
-import React from 'react'
-import CategoriesHeader from './CategoriesHeader'
-import PostsView from './PostsView'
+import React, { Component, Fragment } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
 
-import {Route} from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles';
+import PostPage from './PostPage'
+import PostsPage from './PostsPage'
+import NotFound from './NotFound'
+import ScrollToTop from './ScrollToTop'
 
-const styles = theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 600,
-    position: 'relative',
-    minHeight: 200,
-  },
-})
+class App extends Component {
 
-const App = ({ classes }) => (
-  <div className={classes.root}>
-    <Route path="/:categoryName?" render={(props) => (
-      <CategoriesHeader {...props}/>
-    )}/>
-    <PostsView />
-  </div>
-)
+  render() {
+    return (
+      <Fragment>
+        <ToastContainer />
+        <Route component={ScrollToTop} />
+        <Switch>
+          <Route exact path="/:category/:post_id" render={(props) => {
+            const {category, post_id} = props.match.params
+            return <PostPage category={category} postId={post_id}/>
+          }}/>
+          <Route path="/:category?" render={(props) => (<PostsPage category={props.match.params.category}/>)}/>
+          <Route component={NotFound}/>
+        </Switch>
+      </Fragment>
+    )
+  }
+}
 
-export default withStyles(styles, { withTheme: true })(App);
+export default App

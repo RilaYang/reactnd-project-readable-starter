@@ -1,20 +1,17 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { createLogger } from 'redux-logger'
-import rootReducer from '../reducers'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import toastify from './middlewares/toastify'
+import * as api from '../api/readable-api'
+import rootReducer from './ducks';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const configureStore = () => {
+  const middlewares = [thunk.withExtraArgument({ api }), toastify];
 
-const configureStore = preloadedState => {
-  const store = createStore(
+  return createStore(
     rootReducer,
-    preloadedState,
-    composeEnhancers(
-      applyMiddleware(thunk, createLogger()),
-    )
-  )
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(...middlewares)
+  );
+};
 
-  return store
-}
-
-export default configureStore
+export default configureStore;

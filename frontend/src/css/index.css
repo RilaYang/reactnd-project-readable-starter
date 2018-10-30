@@ -1,0 +1,15 @@
+.container {
+  /* background-color: #f8f8fb; */
+}
+
+.vote-score__counter{
+  font-weight: bold;
+}
+
+.vote-score__counter--positive {
+  color: green;
+}
+
+.vote-score__counter--negative {
+  color: red;
+}
